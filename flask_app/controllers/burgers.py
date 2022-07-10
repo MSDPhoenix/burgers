@@ -15,7 +15,7 @@ def create():
         "bun": request.form['bun'],
         "meat": request.form['meat'],
         "calories": request.form['calories'],
-        "user_id": 
+        "user_id": xxxxxxx
     }
     Burger.save(data)
     return redirect('/burgers')
@@ -23,7 +23,7 @@ def create():
 
 
 
-@app.route('/burgers')
+@app.route('/burgers/')
 def burgers():
     return render_template("results.html",all_burgers=Burger.get_all())
 
