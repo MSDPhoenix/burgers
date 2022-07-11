@@ -28,8 +28,6 @@ class Burger:
 
     @classmethod
     def get_one(cls,data):
-        print('D'*50)
-        print(data)
         query = """
                 SELECT * FROM burgers
                 LEFT JOIN add_ons ON burgers.id = add_ons.burger_id
@@ -59,6 +57,17 @@ class Burger:
     def update(cls,data):
         query = "UPDATE burgers SET name=%(name)s, bun=%(bun)s, meat=%(meat)s, calories=%(calories)s,updated_at = NOW() WHERE id = %(id)s;"
         return connectToMySQL('burgers').query_db(query,data)
+
+    @classmethod
+    def add_topping(cls,data):
+        query = "INSERT INTO add_ons (burger_id, topping_id) VALUES (%(burger_id)s,%(topping_id)s);"
+        return connectToMySQL('burgers').query_db(query,data)
+
+    @classmethod
+    def remove_topping(cls,data):
+        query = "DELETE FROM add_ons WHERE burger_id = %(burger_id)s AND topping_id = %(topping_id)s;"
+        return connectToMySQL('burgers').query_db(query,data)
+
 
     @classmethod
     def destroy(cls,data):

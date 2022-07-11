@@ -21,9 +21,9 @@
     {% endwith %}
     <div class="form-group">
         <label for="topping_name">New Topping Name:</label>
-        <input type="text" name="topping_name" id="name" class="form-control">
+        <input type="text" name="topping_name" id="name" class="form-control" value="{{topping_to_edit.topping_name}}">
     </div>
-    <input type="submit" value="Add Topping" class="btn btn-primary btn-outline-dark">
+    <input type="submit" value="Edit Topping Name" class="btn btn-primary btn-outline-dark">
 </form>
 
 {% endblock body %}

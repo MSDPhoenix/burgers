@@ -12,6 +12,17 @@ class Topping:
         self.updated_at = db_data['updated_at']
 
     @classmethod
+    def get(cls,data):
+        query = '''
+                SELECT * FROM toppings 
+                WHERE id=%(topping_id)s;
+                '''
+        results = connectToMySQL('burgers').query_db(query,data)
+        topping = cls(results[0])
+        return topping
+
+
+    @classmethod
     def save( cls , data ):
         query = "INSERT INTO toppings ( topping_name, created_at , updated_at ) VALUES (%(topping_name)s,NOW(),NOW());"
         return connectToMySQL('burgers').query_db(query, data)
@@ -65,8 +76,6 @@ class Topping:
         results = connectToMySQL('burgers').query_db( query )
         all_toppings = []
         for result in results:
-            print('toppings '*5)
-            print(result)
             this_topping = cls(result)
             all_toppings.append(this_topping)
         return all_toppings

@@ -9,7 +9,7 @@
     <title>Burger Form</title>
 </head>
 <body>
-    <form action="/update/{{burger['id']}}" method="post" class="p-3 col-4 mx-auto my-5 bg-dark text-light">
+    <form action="/update/{{burger['id']}}" method="post" class="p-3 col-4 mx-auto mt-5 bg-dark text-light">
         <h2 class="text-center text-primary">Edit The {{burger['name']}}:</h2>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -38,14 +38,37 @@
             <input type="number" min="0" name="calories" id="calories" class="form-control" value="{{burger['calories']}}">
         </div>
         <div class="form-group">
-            <label for="topping_one">Topping One:</label>
-            <input type="text" name="topping_one" id="topping_one" class="form-control" value="{{burger['topping_one']}}">
-        </div>
-        <div class="form-group">
-            <label for="topping_two">Topping Two:</label>
-            <input type="text" name="topping_two" id="topping_two" class="form-control" value="{{burger['topping_two']}}">
+            <label><b>Toppings:</b></label>
+            <label>
+                {% for i in range(burger.toppings|length-1) %}
+                    <span> {{burger.toppings[i].topping_name}}, </span> 
+                {% endfor %}
+                <span>{{burger.toppings[burger.toppings|length-1].topping_name}}</span>
+            </label>
         </div>
         <input type="submit" value="Update Burger" class="btn btn-primary btn-outline-dark">
+    </form>
+    <form action="/burger_remove_topping/{{burger['id']}}/" method="post" class="p-3 col-4 mx-auto my-5xxx bg-dark text-light">
+        <div class="form-group">
+           {# <label><b>Remove Toppings:</b></label>#}
+            <select name="topping_id" id="">
+                {% for topping in burger.toppings %}
+                    <option value="{{topping.id}}"> {{topping.topping_name}} </option> 
+                {% endfor %}
+            </select>
+        </div>
+        <input type="submit" value="Remove Topping" class="btn btn-primary btn-outline-dark">
+    </form>
+    <form action="/burger_add_topping/{{burger['id']}}/" method="post" class="p-3 col-4 mx-auto my-5xxx bg-dark text-light">
+        <div class="form-group">
+            {#<label for="topping_two">Add Topping:</label>#}
+            <select name="topping_id" id="">
+                {% for topping in remaining_toppings %}
+                    <option value="{{topping.id}}">{{topping.topping_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <input type="submit" value="Add Topping" class="btn btn-primary btn-outline-dark">
     </form>
 </body>
 </html>
