@@ -1,5 +1,7 @@
 from flask_app import app
 from flask_app.controllers import burgers
+from flask_app.controllers import restaurants
+from flask_app.controllers import toppings
 
 
 

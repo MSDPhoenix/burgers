@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block body %}
+
+<a href="/" class="btn btn-info btn-outline-primary" >Home</a>
+
+{% for topping in all_toppings %}
+
+    <p>{{topping.topping_name}}</p>
+
+{% endfor %}
+
+{% endblock body %}

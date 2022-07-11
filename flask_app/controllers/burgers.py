@@ -1,12 +1,13 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.burger import Burger
+from flask_app.models.restaurant import Restaurant
 
 
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html",restaurants=Restaurant.get_all())
 
 @app.route('/create',methods=['POST'])
 def create():
@@ -15,7 +16,7 @@ def create():
         "bun": request.form['bun'],
         "meat": request.form['meat'],
         "calories": request.form['calories'],
-        "user_id": xxxxxxx
+        "restaurant_id": request.form['restaurant_id'],
     }
     Burger.save(data)
     return redirect('/burgers')
@@ -33,7 +34,7 @@ def detail_page(burger_id):
     data = {
         'id': burger_id
     }
-    return render_template("details_page.html",burger=Burger.get_one(data))
+    return render_template("details_page.html",burger=Burger.get_one(data),restaurant=Restaurant.get_by_burger_id(Restaurant,data))
 
 @app.route('/edit_page/<int:burger_id>')
 def edit_page(burger_id):

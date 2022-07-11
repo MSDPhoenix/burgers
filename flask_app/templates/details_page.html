@@ -16,12 +16,15 @@
             <div class="card col-3 bg-dark text-light">
                 <div class="card-body">
                     <h2 class="card-title text-primary">{{ burger['name'] }}</h2>
+                    <p class="card-text">Sold at: {{ restaurant.name }}</p>
                     <p class="card-text">Bun: {{burger['bun']}}</p>
                     <p class="card-text">Meat: {{burger['meat']}}</p>
-                </div>
-                <div class="card-footer">
-                    <h3 class="card-subtitle">Calories: {{burger['calories']}}</h3>
-                    <p class="card-subtitle">Created on: {{ burger['created_at'].strftime("%B %d, %Y  at %H:%M:%S") }}</p>
+                    <p class="card-text">Calories: {{burger['calories']}}</p>
+                    <p class="card-text">Created on: {{ burger['created_at'].strftime("%B %d, %Y  at %H:%M:%S") }}</p>
+                    <p class="card-text">Toppings: </p>
+                    {% for topping in burger['toppings'] %}
+                        <i><p class="card-text">{{ topping.topping_name }}</p></i>
+                    {% endfor %}
                 </div>
                 <a href="/edit_page/{{burger['id']}}"  >Edit</a>
                 <a href="/delete/{{burger['id']}}"  >Delete</a>

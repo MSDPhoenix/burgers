@@ -2,17 +2,10 @@ from flask_app import app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.restaurant import Restaurant
 
-@app.route('/')
-def index():
+@app.route('/restaurants/')
+def restaurants():
     restaurants = Restaurant.get_all()
-    for restaurant in restaurants:
-        month=restaurant.created_at.strftime('%B')
-        date=restaurant.created_at.strftime('%d')
-        year=restaurant.created_at.strftime('%Y')
-        if date[0] == "0":
-            date = date[1:]
-        restaurant.created_at=month+' '+date+', '+year
-    return render_template('index.html', restaurants=restaurants)
+    return render_template('restaurants.html', restaurants=restaurants)
 
 @app.route('/new_restaurant_form/')
 def new_restaurant_form():
@@ -28,29 +21,13 @@ def save_restaurant():
     id=restaurant.save_restaurant(data)
     return redirect('/show_one_restaurant/'+str(id))
 
-@app.route('/show_one_restaurant/<int:id>/')
+@app.route('/restaurant/<int:id>/')
 def show_one_restaurant(id):
     data = {
         'id':id
     }
-    restaurant=restaurant.get(data)
-    month=restaurant.created_at.strftime('%B')
-    date=restaurant.created_at.strftime('%d')
-    year=restaurant.created_at.strftime('%Y')
-    if date[0] == "0":
-        date = date[1:]
-    created_at=month+' '+date+', '+year
-    month=restaurant.updated_at.strftime('%B')
-    date=restaurant.updated_at.strftime('%d')
-    year=restaurant.updated_at.strftime('%Y')
-    time=restaurant.updated_at.strftime('%I:%M')
-    am_pm=restaurant.updated_at.strftime('%p').lower()
-    if time[0] == "0":
-        time = time[1:]
-    if date[0] == "0":
-        date = date[1:]
-    updated_at=month+' '+date+', '+year+' at '+time+' '+am_pm
-    return render_template('show_one_restaurant.html',restaurant=restaurant,created_at=created_at,updated_at=updated_at)
+    restaurant=Restaurant.get(data)
+    return render_template('restaurant.html',restaurant=restaurant)
 
 @app.route('/edit_restaurant_page/<int:id>/')
 def edit_restaurant_page(id):
@@ -79,6 +56,5 @@ def update_restaurant(id):
     Restaurant.update(data)
     return redirect('/show_one_restaurant/'+str(id))
 
-    session.modified = True # By default, it's set to False
 
 
