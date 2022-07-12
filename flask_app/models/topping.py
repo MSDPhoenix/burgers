@@ -26,7 +26,17 @@ class Topping:
     def save( cls , data ):
         query = "INSERT INTO toppings ( topping_name, created_at , updated_at ) VALUES (%(topping_name)s,NOW(),NOW());"
         return connectToMySQL('burgers').query_db(query, data)
-        # This method will retrieve the specific topping along with all the burgers associated with it.
+
+    @classmethod            
+    def update_topping( cls , data ):   
+        query = "UPDATE toppings SET topping_name = %(topping_name)s WHERE id = %(topping_id)s; "
+        return connectToMySQL('burgers').query_db(query, data)
+
+    @classmethod            # topping_id
+    def delete_topping( cls , data ):   
+        query = "DELETE FROM toppings WHERE id = %(topping_id)s;"
+        return connectToMySQL('burgers').query_db(query, data)
+
     @classmethod
     def get_topping_with_burgers( cls , data ):
         query = """

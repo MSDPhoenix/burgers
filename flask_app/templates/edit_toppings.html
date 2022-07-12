@@ -8,7 +8,7 @@
     <a href="/edit_topping_name/{{topping.id}}/"><p>{{topping.topping_name}}{{topping.id}}</p></a>
 
 {% endfor %}
-<form action="/update/{{topping_to_edit.id}}/" method="post" class="p-3 col-4 mx-auto my-5 bg-dark text-light">
+<form action="/update_topping/" method="post" class="p-3 col-4 mx-auto my-5 bg-dark text-light">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
         <div class="alert alert-danger" role="alert">
@@ -20,12 +20,12 @@
         {% endif %}
     {% endwith %}
     <div class="form-group">
-        <label for="topping_name">Old Topping Name: {{topping_to_edit.topping_name}}</label>
-        <br>
+        <input type="hidden" name="topping_id" value="{{topping_to_edit.id}}">
         <label for="topping_name">New Topping Name:</label>
         <input type="text" name="topping_name" id="name" class="form-control" value="{{topping_to_edit.topping_name}}">
     </div>
     <input type="submit" value="Edit Topping Name" class="btn btn-primary btn-outline-dark">
+    <a href="/delete_topping/{{topping_to_edit.id}}" class="btn btn-primary btn-outline-dark">Delete Topping</a>
 </form>
 
 {% endblock body %}
