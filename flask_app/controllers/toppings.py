@@ -40,3 +40,4 @@ def edit_topping_name(topping_id):
 
 
 
+/update/{{topping_to_edit.id}}

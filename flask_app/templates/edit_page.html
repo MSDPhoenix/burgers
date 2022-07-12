@@ -9,6 +9,7 @@
     <title>Burger Form</title>
 </head>
 <body>
+    <a href="/" class="btn btn-info btn-outline-primary" >Home</a>
     <form action="/update/{{burger['id']}}" method="post" class="p-3 col-4 mx-auto mt-5 bg-dark text-light">
         <h2 class="text-center text-primary">Edit The {{burger['name']}}:</h2>
         {% with messages = get_flashed_messages() %}
