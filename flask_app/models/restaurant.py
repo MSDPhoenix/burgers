@@ -22,22 +22,33 @@ class Restaurant:
                 '''
         results = connectToMySQL('burgers').query_db(query,data)
         restaurant = cls(results[0])
-        for result in results:
-            data = {
-                'id' : result['burgers.id'],
-                'name' :result['burgers.name'],
-                'bun' : result['bun'],
-                'meat' : result['meat'],
-                'calories' : result['calories'],
-                'created_at' : result['burgers.created_at'],
-                'updated_at' : result['burgers.updated_at'],
-            }
-            this_burger = Burger(data)
-            restaurant.burgers.append(this_burger)
-            toppings = Topping.get_toppings(data)
-            for topping in toppings:
-                this_burger.toppings.append(topping)
-            return restaurant
+        print('A'*50)
+        if results[0]['burgers.id']:
+        #     print('***',results[0]['burgers.id'])
+        # else:
+        #     print('hello')
+
+            for result in results:
+                burger_data = {
+                    'id' : result['burgers.id'],
+                    'name' :result['burgers.name'],
+                    'bun' : result['bun'],
+                    'meat' : result['meat'],
+                    'calories' : result['calories'],
+                    'created_at' : result['burgers.created_at'],
+                    'updated_at' : result['burgers.updated_at'],
+                }
+                this_burger = Burger(burger_data)
+                # print(this_burger.id)
+                # print(this_burger.name)
+                # print(this_burger.bun)
+                # print(this_burger.meat)
+                # print(this_burger.calories)
+                restaurant.burgers.append(this_burger)
+                toppings = Topping.get_toppings(burger_data)
+                for topping in toppings:
+                    this_burger.toppings.append(topping)
+        return restaurant
 
     def get_by_burger_id(cls,data):
         query = '''

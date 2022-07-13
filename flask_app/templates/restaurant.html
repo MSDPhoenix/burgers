@@ -3,18 +3,21 @@
 
 <h1><u>{{restaurant.name}}</u></h1>
 <br>
-{% for burger in restaurant.burgers %}
+{#{{restaurant.burgers[]}}#}
+{% if restaurant.burgers %}
+    {% for burger in restaurant.burgers %}
 
-    <h4>{{burger.name}}</h4>
-    <p>{{burger.bun}}</p>
-    <p>{{burger.meat}}</p>
-    <p>{{burger.calories}}</p>
+        <h4>{{burger.name}}</h4>
+        <p>{{burger.bun}}</p>
+        <p>{{burger.meat}}</p>
+        <p>{{burger.calories}}</p>
 
-    {% for topping in burger.toppings %}
-        <p><i>{{topping.topping_name}}</i></p>
+        {% for topping in burger.toppings %}
+            <p><i>{{topping.topping_name}}</i></p>
+        {% endfor %}
+
     {% endfor %}
+{% endif %}
 
-{% endfor %}
-
-<a href="/">Home</a> 
+<a href="/" class="btn btn-outline-primary" >Home</a> <br>
 {% endblock body   %}

@@ -14,12 +14,12 @@ def new_restaurant_form():
 @app.route('/save_restaurant/',methods=['POST'])
 def save_restaurant():
     data = {
-        'first_name':request.form['first_name'],
-        'last_name':request.form['last_name'],
-        'email':request.form['email'],
+        'name':request.form['name'],
     }
-    id=restaurant.save_restaurant(data)
-    return redirect('/show_one_restaurant/'+str(id))
+    print('A'*50)
+    print(data)
+    id=Restaurant.save_restaurant(data)
+    return redirect('/restaurant/'+str(id))
 
 @app.route('/restaurant/<int:id>/')
 def show_one_restaurant(id):

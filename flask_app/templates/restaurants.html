@@ -1,10 +1,14 @@
 {% extends "index.html"   %}
 {% block body   %}
 
+<a href="/" class="btn btn-outline-primary" >Home</a> <br>
+
 {% for restaurant in restaurants %}
 
     <a href="/restaurant/{{restaurant.id}}">{{restaurant.name}}</a> 
 
 {% endfor %}
+
+<br><a href="/new_restaurant_form/" class="btn btn-outline-primary color-light" >Add New Restaurant</a>
 
 {% endblock body   %}
