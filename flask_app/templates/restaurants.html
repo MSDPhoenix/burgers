@@ -1,14 +1,18 @@
 {% extends "index.html"   %}
 {% block body   %}
 
-<a href="/" class="btn btn-outline-primary" >Home</a> <br>
+<div id="wrapper">
+    <a href="/" class="btn btn-outline-primary" >Home</a> <br>
+    <br>
+    {% for restaurant in restaurants %}
 
-{% for restaurant in restaurants %}
+        <hr>
+        <a href="/restaurant/{{restaurant.id}}">{{restaurant.name}}</a>
 
-    <a href="/restaurant/{{restaurant.id}}">{{restaurant.name}}</a> 
-
-{% endfor %}
-
-<br><a href="/new_restaurant_form/" class="btn btn-outline-primary color-light" >Add New Restaurant</a>
+    {% endfor %}
+    <hr>
+    <br>
+    <a href="/new_restaurant_form/" class="btn btn-outline-primary color-light" >Add New Restaurant</a>
+</div>
 
 {% endblock body   %}
